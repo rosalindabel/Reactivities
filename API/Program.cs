@@ -11,13 +11,19 @@ builder.Services.AddDbContext<AppDbContext>(opt =>
     opt.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
+builder.Services.AddCors();
+
 var app = builder.Build();
+
+// important that this is here
+app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod()
+    .WithOrigins("http://localhost:3000", "https://localhost:3000"));
 
 // Configure the HTTP request pipeline.
 
 app.MapControllers();
- 
-// creatin service scope - when this fn goes outside of scope anything used within scope willlbe cleared out
+
+// creatin service scope - when this fn goes outside of scope anything used within scope willl be cleared out
 using var scope = app.Services.CreateScope();
 var services = scope.ServiceProvider;
 
@@ -30,8 +36,8 @@ try
 catch (Exception ex)
 {
     var logger = services.GetRequiredService<ILogger<Program>>();
-    logger.LogError(ex,"An error occurred during migration");
+    logger.LogError(ex, "An error occurred during migration");
     throw;
-} 
+}
 
 app.Run();

@@ -1,4 +1,4 @@
-using System; 
+using System;
 using Domain;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -20,5 +20,5 @@ public class ActivitiesController(AppDbContext context) : BaseApiController
         var activity = await context.Activities.FindAsync(id);
         if (activity == null) return NotFound();
         return activity;
-    } 
+    }
 }
