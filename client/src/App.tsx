@@ -20,6 +20,8 @@ function App() {
   //   return () => { }
   // }, [])
 
+  // this is using axios instead of the JavaScript fetch above
+  
   useEffect(() => {
     axios.get<Activity[]>('https://localhost:5001/api/activities') //returns a javascript promise
       .then(response => setActivities(response.data))
