@@ -1,12 +1,12 @@
 
 //import { CssBaseline, List, ListItem, ListItemText, Typography } from "@mui/material";
-import { Box, Container, CssBaseline, Typography } from "@mui/material";
+import { Box, Container, CssBaseline } from "@mui/material";
 //import { Fragment, useEffect, useState } from "react"
 //import { useEffect, useState } from "react"
-import { useState } from "react"
+//import { useState } from "react"
 import NavBar from "./NavBar";
-import ActivityDashboard from "../../features/activities/dashboard/ActivityDashboard";
-import { useActivities } from "../../lib/hooks/useActivities";
+import ActivityDashboard from "../../features/activities/dashboard/ActivityDashboard"; 
+import { Outlet } from "react-router";
 
 function App() {
 
@@ -14,9 +14,9 @@ function App() {
   //[where to store it and fn to store it  ]
   //useState can include the type of activities lib/types/index.d.ts
   //const [activities, setActivities] = useState<Activity[]>([]);
-  const [selectedActivity, setSelectedActivity] = useState<Activity | undefined>(undefined)
-  const [editMode, setEditMode] = useState(false);
-  const { activities, isPending } = useActivities();
+  // const [selectedActivity, setSelectedActivity] = useState<Activity | undefined>(undefined)
+  // const [editMode, setEditMode] = useState(false);
+  //const { activities, isPending } = useActivities();
 
 
   //What happens when our component loads/mounts and exe code in useEffect fn below
@@ -37,24 +37,24 @@ function App() {
 
   //   return () => { }
   // }, [])
+// replaced by routing
+  // const handleSelectActivity = (id: string) => {
+  //   setSelectedActivity(activities!.find(x => x.id === id));
+  // }
 
-  const handleSelectActivity = (id: string) => {
-    setSelectedActivity(activities!.find(x => x.id === id));
-  }
+  // const handleCancelSelectActivity = () => {
+  //   setSelectedActivity(undefined);
+  // }
 
-  const handleCancelSelectActivity = () => {
-    setSelectedActivity(undefined);
-  }
+  // const handleOpenForm = (id?: string) => {
+  //   if (id) handleSelectActivity(id);
+  //   else handleCancelSelectActivity();
+  //   setEditMode(true);
+  // }
 
-  const handleOpenForm = (id?: string) => {
-    if (id) handleSelectActivity(id);
-    else handleCancelSelectActivity();
-    setEditMode(true);
-  }
-
-  const handleFormClose = () => {
-    setEditMode(false);
-  }
+  // const handleFormClose = () => {
+  //   setEditMode(false);
+  // }
 
   // initially we do not want to submit form to server. 
   //2 x types of submssion = create or update
@@ -113,23 +113,27 @@ function App() {
     // Fragment can be replaced by empty tags <>
     <Box sx={{ bgcolor: '#eeeeee', minHeight: '100vh' }}>
       <CssBaseline />
-      <NavBar openForm={handleOpenForm} />
+      {/* <NavBar openForm={handleOpenForm} /> */}
+      <NavBar />
       <Container maxWidth='xl' sx={{ mt: 3 }}>
-        {!activities || isPending ? (
+        <Outlet />
+      {/* <ActivityDashboard /> */}
+
+        {/* {!activities || isPending ? (
           <Typography>Loading</Typography>
         ) : (
           <ActivityDashboard
-            activities={activities}
-            selectActivity={handleSelectActivity}
-            cancelSelectActivity={handleCancelSelectActivity}
-            selectedActivity={selectedActivity}
-            editMode={editMode}
-            openForm={handleOpenForm}
-            closeForm={handleFormClose}
+            // activities={activities}
+            // selectActivity={handleSelectActivity}
+            // cancelSelectActivity={handleCancelSelectActivity}
+            // selectedActivity={selectedActivity}
+            // editMode={editMode}
+            // openForm={handleOpenForm}
+            // closeForm={handleFormClose}
             //submitForm={handleSubmitForm}
             //deleteActivity={handleDelete} 
             />
-        )}
+        )} */}
 
       </Container>
     </Box>
