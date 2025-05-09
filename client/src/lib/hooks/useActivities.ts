@@ -11,7 +11,7 @@ export const useActivities = (id?: string) => {
             const response = await agent.get<Activity[]>('/activities');
             return response.data;
         },
-        // want to enable this fbn is have the id. !! casts the id into a boolean
+        // want to enable this fn is have the id. !! casts the id into a boolean
         //enabled: !!id
     }
     );

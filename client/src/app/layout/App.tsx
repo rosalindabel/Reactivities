@@ -5,8 +5,9 @@ import { Box, Container, CssBaseline } from "@mui/material";
 //import { useEffect, useState } from "react"
 //import { useState } from "react"
 import NavBar from "./NavBar";
-import ActivityDashboard from "../../features/activities/dashboard/ActivityDashboard"; 
-import { Outlet } from "react-router";
+//import ActivityDashboard from "../../features/activities/dashboard/ActivityDashboard"; 
+import { Outlet, useLocation } from "react-router";
+import HomePage from "../../features/home/homePage";
 
 function App() {
 
@@ -104,7 +105,7 @@ function App() {
   //     </List>
   //   </>
   // )
-
+const location = useLocation();
   return (
 
     //only return one thing froma javascript fn = an object an array but only one thing. Hence the div or Fragment
@@ -114,7 +115,9 @@ function App() {
     <Box sx={{ bgcolor: '#eeeeee', minHeight: '100vh' }}>
       <CssBaseline />
       {/* <NavBar openForm={handleOpenForm} /> */}
-      <NavBar />
+      {location.pathname === '/' ? <HomePage /> : (
+        <>
+         <NavBar />
       <Container maxWidth='xl' sx={{ mt: 3 }}>
         <Outlet />
       {/* <ActivityDashboard /> */}
@@ -136,6 +139,10 @@ function App() {
         )} */}
 
       </Container>
+        </>
+
+      )}
+     
     </Box>
   )
 }
